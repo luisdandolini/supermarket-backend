@@ -35,6 +35,12 @@ app.post('/list-items', async (req, res) => {
   return res.json(newItem);
 });
 
+app.delete('/list-item/:id', async (req, res) => {
+  const id = req.params.id
+  const listItemItemDeleted = await ListItem.findByIdAndDelete(id)
+  return res.json(listItemItemDeleted);
+})
+
 app.listen(PORT, () => {
   connectDatabase().catch((error) => {
     console.log(`Erro connecting database: ${error}`);
