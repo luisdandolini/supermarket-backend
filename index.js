@@ -36,10 +36,23 @@ app.post('/list-items', async (req, res) => {
 });
 
 app.delete('/list-item/:id', async (req, res) => {
-  const id = req.params.id
-  const listItemItemDeleted = await ListItem.findByIdAndDelete(id)
+  const id = req.params.id;
+  const listItemItemDeleted = await ListItem.findByIdAndDelete(id);
   return res.json(listItemItemDeleted);
-})
+});
+
+app.put('/list-item/:id', async (req, res) => {
+  const id = req.params.id
+  const listItemUpdate = await ListItem.findByIdAndUpdate(id, {
+    name: req.body.name,
+    quantity: req.body.quantity,
+    checked: req.body.checked,
+  },
+  {
+    new: true,
+  })
+  return res.json(listItemUpdate);
+});
 
 app.listen(PORT, () => {
   connectDatabase().catch((error) => {
