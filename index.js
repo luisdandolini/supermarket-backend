@@ -2,7 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./src/routes');
 const app = express();
+const cors = require('cors');
 app.use(express.json());
+app.use(cors({
+  origin: '*'
+}))
 const PORT = 3000;
 
 async function connectDatabase() {
